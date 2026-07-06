@@ -13,3 +13,16 @@ h1 { /* now these rules only apply to h1 tags! */
 	font-family: sans-serif; /* you can set this to serif, sans-serif, monospace, or cursive! */
 
 }
+
+
+.bg-gold {
+    background-color: gold;
+}
+
+.bg-orchid {
+    background-color: orchid;
+}
+
+.bg-green {
+    background-color: lightgreen;
+}

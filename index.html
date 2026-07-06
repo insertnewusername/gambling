@@ -16,8 +16,21 @@
                     random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
                     coins += random_number;
                     display.innerHTML = "Rolled " + random_number + "! Coins: " + coins;
+
+
+
+                    if (coins >= 100) {
+                    document.body.className = "bg-gold";
+                    } else if (coins >= 50) {
+                        document.body.className = "bg-orchid";
+                    } else if (coins >= 20) {
+                          document.body.className = "bg-green";
+                    }
+
                 }
             });
+
+
         </script>
 	</body>
 </html>
