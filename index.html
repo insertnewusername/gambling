@@ -37,9 +37,6 @@
     <script src="script.js"></script>
 
 <script>
-    let coins = loadCoins();
-    display.innerHTML = "Coins: " + coins;
-    updateColours();
     let isHolding = false;
     let holdTimer = null;
     let progressInterval = null;
@@ -57,6 +54,9 @@
     const progressBar = document.getElementById('holdProgress');
     const progressFill = document.getElementById('progressFill');
     const reachedamount = document.getElementById('reached100');
+    let coins = loadCoins();
+    display.innerHTML = "Coins: " + coins;
+    updateColours();
 
     okButton.addEventListener("click", () => {
         rollOverlay.style.display = "none";
@@ -121,6 +121,7 @@
             // --- Random coin gain---
             let random_number = Math.floor(Math.random() * 10) + 1;
             coins += random_number;
+            saveCoins(); 
             display.innerHTML = "Coins: " + coins;
             updateColours();
 
@@ -136,6 +137,7 @@
                 if (isHolding) {
                     if (coins >= 100) {
                         coins -= 100;
+                        saveCoins(); 
                         let duckFile = rollDuck();
                         startRollAnimation(duckFile);
                     } else {
