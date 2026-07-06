@@ -7,6 +7,7 @@
 </div>
    <div id="displayWrapper">
     <h1 id="display">Press "j" to start!</h1>
+    <div id="reached100">Hold "j" to roll</div>
     <!-- Hold Progress Bar now inside the wrapper -->
     <div id="holdProgress">
         <div id="progressFill"></div>
@@ -53,6 +54,7 @@
     const okButton = document.getElementById("okButton");
     const progressBar = document.getElementById('holdProgress');
     const progressFill = document.getElementById('progressFill');
+    const reachedamount = document.getElementById('reached100');
 
     okButton.addEventListener("click", () => {
         rollOverlay.style.display = "none";
@@ -144,6 +146,13 @@
             hideProgressBar(); // Hides bar
         }
     });
+
+    if (coins >=100) {
+        reachedamount.style.display = "block"
+    }
+    else {
+        reachedamount.style.display = "none"
+    }
 </script>
 </body>
 </html>
