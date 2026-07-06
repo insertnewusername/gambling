@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="styles.css">
-<body>
-    <h1 id="top">Onekey RNG</h1>
-    <h1 id="display">Press or hold "j"</h1>
+    <link rel="stylesheet" href="styles.css">
+	<head>
+        <style>
+        </style>
+	</head>
+	<body>
+        <h1 id="top">Onekey RNG</h1>
+        <h1 id="display">Press "j" to start!</h1>
 
-    <img id="duck" src="" width="200">
 
-    <script src="script.js"></script>
+         <!-- Duck image -->
+         <img id="duck" src="" width="200">
 
-    <script>
-        let coins = 0;
-        let isHolding = false;
+            <!-- Load rollDuck FIRST -->
+            <script src="script.js"></script>
 
-        const display = document.getElementById("display");
-        const duckImg = document.getElementById("duck");
+        <script> 
+            let random_number = 0; //declare a variable to hold a number
+            let coins = 0;
+            let holdStart = 0;
+            let isHolding = false;
+            const display = document.getElementById("display")
+            const duckImg = document.getElementById("duck");
 
-        function updateColours() {
-            if (coins >= 100) {
-                document.body.className = "bg-gold";
-            } else if (coins >= 50) {
-                document.body.className = "bg-orchid";
-            } else if (coins >= 20) {
-                document.body.className = "bg-green";
-            }
-        }
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "j" && !isHolding) {
+                    isHolding = true; //prevents repeat firing
+                    holdStart = Date.now();
+                    random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
+                    coins += random_number;
+                    display.innerHTML = "Coins: " + coins;
 
-        // PRESS = gain coins
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "j" && !isHolding) {
-                isHolding = true;
-                coins += 1;
-                display.innerHTML = "Coins: " + coins;
-                updateColours();
-            }
-        });
 
-        // HOLD = roll (costs 100 coins)
-        document.addEventListener("keyup", (event) => {
-            if (event.key === "j") {
-                isHolding = false;
 
-                if (coins >= 100) {
-                    coins -= 100;
+                    if (coins >= 100) {
+                    document.body.className = "bg-gold";
+                    } else if (coins >= 50) {
+                        document.body.className = "bg-orchid";
+                    } else if (coins >= 20) {
+                          document.body.className = "bg-green";
+                    }
 
-                    let duckFile = rollDuck();
-                    duckImg.src = "ducks/" + duckFile;
-
-                    display.innerHTML = "Rolled: " + duckFile + " (Coins left: " + coins + ")";
-                } else {
-                    display.innerHTML = "Not enough coins to roll! (" + coins + ")";
                 }
+            });
+
+
+                // HOLD = roll (costs 100 coins)
+document.addEventListener("keyup", (event) => {
+    if (event.key === "j") {
+        isHolding = false;
+
+        const holdTime = Date.now() - holdStart;
+
+        if (holdTime >= 3000) {
+            // HELD FOR 3 SECONDS → roll
+            if (coins >= 100) {
+                coins -= 100;
+
+                let duckFile = rollDuck();
+                duckImg.src = "ducks/" + duckFile;
+
+                display.innerHTML = "Rolled: " + duckFile + " (Coins left: " + coins + ")";
+            } else {
+                display.innerHTML = "Not enough coins to roll! (" + coins + ")";
             }
-        });
-    </script>
-</body>
+        } else {
+            // TAPPED OR SHORT HOLD → do nothing
+            display.innerHTML = "Coins: " + coins;
+        }
+    }
+});
+
+
+
+        </script>
+	</body>
 </html>
