@@ -146,7 +146,6 @@ function startRollAnimation(finalDuck) {
         if (i === targetIndex) {
             src = "ducks/" + finalDuck;
             img.id = "targetDuck";
-            img.style.border = "4px solid gold"; // 👈 Highlight the winner
             img.style.borderRadius = "12px";
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
@@ -181,6 +180,7 @@ function startRollAnimation(finalDuck) {
     // Show result AFTER animation ends
     setTimeout(() => {
         resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
+        img.style.border = "4px solid gold"; // 👈 Highlight the winner
         
         // Save the duck to collection
         addDuckToCollection(finalDuck);

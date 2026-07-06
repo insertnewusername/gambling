@@ -4,6 +4,10 @@
 <body>
     <div><h1 id="top">Onekey RNG</h1></div>
     <div id="displayWrapper"><h1 id="display">Press "j" to start!</h1></div>
+<!-- Hold Progress Bar -->
+<div id="holdProgress">
+    <div id="progressFill"></div>
+</div>
 
     <!-- Roll Overlay -->
 <div id="rollOverlay">
@@ -31,6 +35,9 @@
     let coins = 0;
     let isHolding = false;
     let holdTimer = null;
+    let progressInterval = null;
+    let progressStartTime = 0;
+    const HOLD_DURATION = 2000; // 2 seconds
 
     const display = document.getElementById("display");
     const duckImg = document.getElementById("duck");
@@ -59,34 +66,50 @@
     }
 
     // PRESS = random coins
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "j" && !isHolding) {
-            isHolding = true;
+document.addEventListener("keydown", (event) => {
+    if (event.key === "j" && !isHolding && rollOverlay.style.display !== "flex") {
+        isHolding = true;
+        
+        // --- Show progress bar ---
+        const progressBar = document.getElementById('holdProgress');
+        const progressFill = document.getElementById('progressFill');
+        progressBar.style.display = 'block';
+        progressFill.style.width = '0%';
+        progressStartTime = Date.now();
 
-            // random coin gain (your original feature)
-            let random_number = Math.floor(Math.random() * 10) + 1;
-            coins += random_number;
-            display.innerHTML = "Coins: " + coins;
+        // --- Start progress update interval (every 50ms for smoothness) ---
+        if (progressInterval) clearInterval(progressInterval);
+        progressInterval = setInterval(() => {
+            const elapsed = Date.now() - progressStartTime;
+            const progress = Math.min(elapsed / HOLD_DURATION, 1);
+            progressFill.style.width = (progress * 100) + '%';
+        }, 50);
 
-            updateColours();
+        // --- Random coin gain (your original feature) ---
+        let random_number = Math.floor(Math.random() * 10) + 1;
+        coins += random_number;
+        display.innerHTML = "Coins: " + coins;
+        updateColours();
 
-            // start 3-second hold timer
-            holdTimer = setTimeout(() => {
-                if (isHolding) {
-                    if (coins >= 100) {
-                        coins -= 100;
-
-                        let duckFile = rollDuck();
-                      startRollAnimation(duckFile);
-
-                    } else {
-                        display.innerHTML =
-                            "Not enough coins to roll! (" + coins + ")";
-                    }
+        // --- Start the 2-second hold timer ---
+        holdTimer = setTimeout(() => {
+            if (isHolding) {
+                if (coins >= 100) {
+                    coins -= 100;
+                    let duckFile = rollDuck();
+                    startRollAnimation(duckFile);
+                } else {
+                    display.innerHTML = "Not enough coins to roll! (" + coins + ")";
                 }
-            }, 2000); // 2 seconds
-        }
-    });
+                // Reset progress bar
+                progressBar.style.display = 'none';
+                progressFill.style.width = '0%';
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+        }, HOLD_DURATION);
+    }
+});
 
     // RELEASE = cancel roll
     document.addEventListener("keyup", (event) => {
