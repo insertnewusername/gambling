@@ -21,6 +21,15 @@ const DUCK_TYPES = [
     { id: 'white(rare).png', name: 'White' }
 ];
 
+const RARITY_MAP = {
+    'yellow.png': '50%',
+    'green.png': '25%',
+    'blue.png': '15%',
+    'pink.png': '6%',
+    'red.png': '3%',
+    'white(rare).png': '1%'
+};
+
 function loadCollection() {
     const saved = localStorage.getItem('duckCollection');
     if (saved) {
@@ -29,7 +38,7 @@ function loadCollection() {
     const initial = {};
     DUCK_TYPES.forEach(d => initial[d.id] = 0);
     return initial;
-}
+} 
 
 let duckCounts = loadCollection();
 
@@ -194,7 +203,9 @@ function startRollAnimation(finalDuck) {
     if (target) {
         target.classList.add("glow"); 
     }
-    resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
+    const duckName = finalDuck.replace(".png", "");
+    const rarity = RARITY_MAP[finalDuck] || '';
+    resultText.innerHTML = `🎉 Rolled: ${duckName} (${rarity} rarity)`;
     addDuckToCollection(finalDuck);
 }, 3200);
 }
