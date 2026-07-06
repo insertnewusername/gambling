@@ -128,16 +128,17 @@ function startRollAnimation(finalDuck) {
         if (i === targetIndex) {
             src = "ducks/" + finalDuck;
             img.id = "targetDuck";
-            img.style.borderRadius = "12px";
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
         }
         
         img.src = src;
-        img.style.height = "200px";
-        img.style.width = "auto";
+        img.style.width = "120px";
+        img.style.height = "120px";
+        img.style.objectFit = "contain";    
         img.style.margin = "0 10px";
         img.style.flexShrink = "0";
+        img.style.borderRadius = "8px";
         
         track.appendChild(img);
     }
@@ -145,17 +146,19 @@ function startRollAnimation(finalDuck) {
     duckCarousel.appendChild(track);
 
     requestAnimationFrame(() => {
-        const target = document.getElementById("targetDuck");
-        if (!target) return;
+        requestAnimationFrame(() => {
+            const target = document.getElementById("targetDuck");
+            if (!target) return;
 
-        const containerWidth = duckCarousel.clientWidth;
-        const targetOffset = target.offsetLeft;
-        const targetWidth = target.offsetWidth;
+            const containerWidth = duckCarousel.clientWidth;
+            const targetOffset = target.offsetLeft;
+            const targetWidth = target.offsetWidth;
 
-        const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
+            const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
 
-        track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
-        track.style.transform = `translateX(-${scrollToX}px)`;
+            track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
+            track.style.transform = `translateX(-${scrollToX}px)`;
+        });
     });
 
     setTimeout(() => {
