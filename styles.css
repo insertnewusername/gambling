@@ -61,14 +61,23 @@ body {
 #duckCarousel {
     display: flex;
     overflow: hidden;
-    height: 300px;    /* big carousel height */
-    border: 3px solid black;
+    height: 300px;
+    width: 100%;
+    border: 4px solid #333;
+    border-radius: 12px;          
+    background: #f0f0f0;          
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     margin-bottom: 20px;
+    align-items: center;       
 }
 
 #duckCarousel img {
-    width: 200px;     /* large duck images */
-    margin-right: 20px;
+    height: 200px;            
+    width: auto;                 
+    margin: 0 10px;
+    flex-shrink: 0;            
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 

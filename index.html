@@ -5,7 +5,6 @@
     <div><h1 id="top">Onekey RNG</h1></div>
     <div><h1 id="display">Press "j" to start!</h1></div>
 
-    <img id="duck" src="" width="200">
     <!-- Roll Overlay -->
 <div id="rollOverlay">
     <div id="rollWindow">
@@ -34,6 +33,7 @@
     okButton.addEventListener("click", () => {
      rollOverlay.style.display = "none";
     display.innerHTML = "Coins: " + coins; // update coin display
+    updateColours();
     });
 
 
@@ -45,6 +45,7 @@
         } else if (coins >= 20) {
             document.body.className = "bg-green";
         }
+        // else → skyblue
     }
 
     // PRESS = random coins
@@ -73,7 +74,7 @@
                             "Not enough coins to roll! (" + coins + ")";
                     }
                 }
-            }, 2000); // 3 seconds
+            }, 2000); // 2 seconds
         }
     });
 
