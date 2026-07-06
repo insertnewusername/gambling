@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="styles.css">
 	<head>
+        <style>
+        </style>
+	</head>
+	<body>
+        <h1 id="display">Press "j" to start!</h1>
         <script> 
             let random_number = 0; //declare a variable to hold a number
+            const display = document.getElementById("display")
             document.addEventListener("keydown", (event) => {
                 if (event.key == "j") {
                     random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
-                    alert(random_number); //show the variable in a popup
+                    dispaly.innerHTML = random_number;
                 }
             });
         </script>
-	</head>
-	<body>
-        <h1 id="display">Hello!</h1>
 	</body>
 </html>
