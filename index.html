@@ -37,7 +37,9 @@
     <script src="script.js"></script>
 
 <script>
-    let coins = 0;
+    let coins = loadCoins();
+    display.innerHTML = "Coins: " + coins;
+    updateColours();
     let isHolding = false;
     let holdTimer = null;
     let progressInterval = null;
