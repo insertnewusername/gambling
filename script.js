@@ -1,12 +1,12 @@
 // --- DUCK COLLECTION SYSTEM ---
 
 const DUCK_TYPES = [
-    { id: 'yellow.png',     name: 'Yellow' },
-    { id: 'green.png',      name: 'Green' },
-    { id: 'blue.png',       name: 'Blue' },
-    { id: 'pink.png',       name: 'Pink' },
-    { id: 'red.png',        name: 'Red' },
-    { id: 'white(rare).png', name: 'White' }
+    { id: 'yellow.png',     name: 'Yellow - 50%' },
+    { id: 'green.png',      name: 'Green - 25%' },
+    { id: 'blue.png',       name: 'Blue - 15%' },
+    { id: 'pink.png',       name: 'Pink - 6%' },
+    { id: 'red.png',        name: 'Red - 3%' },
+    { id: 'white(rare).png', name: 'White - 1%' }
 ];
 
 function loadCollection() {
