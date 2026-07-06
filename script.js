@@ -209,3 +209,50 @@ function startRollAnimation(finalDuck) {
     addDuckToCollection(finalDuck);
 }, 3200);
 }
+
+// --- FALLING DUCKS---
+
+function spawnFallingDucks(count = 2) {
+    // Create container if it doesn't exist
+    let container = document.getElementById('fallingDuckContainer');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'fallingDuckContainer';
+        document.body.appendChild(container);
+    }
+
+    const duckIds = DUCK_TYPES.map(d => d.id);
+
+    for (let i = 0; i < count; i++) {
+        const duck = document.createElement('img');
+        const randomDuck = duckIds[Math.floor(Math.random() * duckIds.length)];
+        duck.src = `ducks/${randomDuck}`;
+
+        // Randomise size, position, rotation, and fall speed
+        const size = 30 + Math.random() * 40;          // 30–70px
+        const left = 5 + Math.random() * 90;           // 5% – 95%
+        const rotation = Math.random() * 360;
+        const duration = 2.5 + Math.random() * 3;      // 2.5–5.5 seconds
+        const delay = Math.random() * 0.4;             // up to 0.4s delay
+
+        duck.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: auto;
+            left: ${left}%;
+            top: -60px;
+            transform: rotate(${rotation}deg);
+            opacity: 0.9;
+            pointer-events: none;
+            animation: duckFall ${duration}s ease-in ${delay}s forwards;
+        `;
+
+        container.appendChild(duck);
+
+        // Remove the element after animation ends + small buffer
+        const totalTime = (duration + delay) * 1000 + 200;
+        setTimeout(() => {
+            if (duck.parentNode) duck.remove();
+        }, totalTime);
+    }
+}
