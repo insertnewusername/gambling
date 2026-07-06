@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-        <script>
-            document.addEventListener("keydown", (event) == "j" {
-                alert("you pressed a key!");
+        <script> 
+            let random_number = 0; //declare a variable to hold a number
+            document.addEventListener("keydown", (event) => {
+                if (event.key == "j") {
+                    random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
+                    alert(random_number); //show the variable in a popup
+                }
             });
         </script>
 	</head>
