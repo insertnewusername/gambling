@@ -205,7 +205,7 @@ function startRollAnimation(chosenDuck) {
     }
     const duckName = chosenDuck.replace(".png", "");
     const rarity = RARITY_MAP[chosenDuck] || '';
-    resultText.innerHTML = `🎉 Rolled: ${duckName} (${rarity})`;
+    resultText.innerHTML = `Rolled: ${duckName} (${rarity})`;
     addDuckToCollection(chosenDuck);
 }, 3200);
 }
