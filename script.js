@@ -18,20 +18,21 @@ function rollDuck() {
 
 function startRollAnimation(finalDuck) {
     rollOverlay.style.display = "flex";
-    resultText.innerHTML = ""; // clear old result
+    resultText.innerHTML = "";
 
-    // ------------------------------------------------------------
-    // Reset the carousel to prevent layout breaking
-    // ------------------------------------------------------------
-    duckCarousel.style.transition = "none";
-    duckCarousel.style.transform = "translateX(0)";
-    duckCarousel.innerHTML = "";
-    // Force the browser to apply these resets immediately
-    void duckCarousel.offsetWidth;
+    //  Reset the container
+    duckCarousel.innerHTML = ""; // Delete old track
 
-    // ------------------------------------------------------------
-    // Carousel with 50 ducks
-    // ------------------------------------------------------------
+    // Create the inner moving track 
+    const track = document.createElement("div");
+    track.style.display = "flex";
+    track.style.alignItems = "center";
+    track.style.height = "100%";
+    track.style.width = "max-content"; // Make it as wide as the ducks
+    track.style.transition = "none";   // No animation yet
+    track.style.transform = "translateX(0)";
+
+    // Duck pool for the spinning effect 
     const fillerDucks = [
         "yellow.png", "yellow.png", "yellow.png", "yellow.png", "yellow.png",
         "green.png", "green.png", "green.png", "green.png",
@@ -41,32 +42,33 @@ function startRollAnimation(finalDuck) {
     ];
 
     const totalDucks = 50;
-    const targetIndex = 28; //  The winning duck!
+    const targetIndex = 28; // Winner sits here
 
+    // Fill with ducks!
     for (let i = 0; i < totalDucks; i++) {
         let img = document.createElement("img");
-
+        
         let src;
         if (i === targetIndex) {
             src = "ducks/" + finalDuck;
+            img.id = "targetDuck"; // Tag the winner
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
         }
-
+        
         img.src = src;
-        img.style.width = "100px";
-        img.style.height = "100px";
-        img.style.marginRight = "10px";
-        img.style.flexShrink = "0"; // Prevent images from squishing
-        if (i === targetIndex) {
-            img.id = "targetDuck"; 
-        }
-        duckCarousel.appendChild(img);
+        img.style.height = "200px";    
+        img.style.width = "auto";      
+        img.style.margin = "0 10px";
+        img.style.flexShrink = "0";    // Stop images from squishing
+        
+        track.appendChild(img);
     }
 
-    // ------------------------------------------------------------
-    // Winning duck centered
-    // ------------------------------------------------------------
+    // Put the track inside the carousel
+    duckCarousel.appendChild(track);
+
+    // Calculate and animate 
     requestAnimationFrame(() => {
         const target = document.getElementById("targetDuck");
         if (!target) return;
@@ -75,23 +77,16 @@ function startRollAnimation(finalDuck) {
         const targetOffset = target.offsetLeft;
         const targetWidth = target.offsetWidth;
 
-        // Calculate how far to scroll so the target is perfectly centered
+        // Distance to scroll to center the winning duck
         const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
 
-        // Apply the smooth slot-machine spin (3 seconds with a nice easing)
-        duckCarousel.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
-        duckCarousel.style.transform = `translateX(-${scrollToX}px)`;
+        // Apply smooth animation to the INNER track
+        track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
+        track.style.transform = `translateX(-${scrollToX}px)`;
     });
 
-    // ------------------------------------------------------------
     // Result
-    // ------------------------------------------------------------
     setTimeout(() => {
-        // Remove the temporary highlight border
-        const target = document.getElementById("targetDuck");
-        if (target) target.style.border = "none";
-
-        // Show what you rolled
         resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
-    }, 3200); // Wait a bit longer than the transition (3s)
+    }, 3200);
 }
