@@ -19,19 +19,17 @@ function rollDuck() {
 
 function startRollAnimation(finalDuck) {
     rollOverlay.style.display = "flex";
-
-    duckCarousel.innerHTML = ""; // clear previous
+    duckCarousel.innerHTML = "";
 
     const ducks = [
-        "yellow.png", "yellow.png", "yellow.png", "yellow.png", "yellow.png", // 50%
-        "green.png", "green.png", "green.png", "green.png",                  // 25%
-        "blue.png", "blue.png", "blue.png",                                  // 15%
-        "pink.png", "pink.png",                                              // 6%
-        "red.png",                                                           // 3%
-        // white is NOT in the spin list (rare reveal only)
+        "yellow.png", "yellow.png", "yellow.png", "yellow.png", "yellow.png",
+        "green.png", "green.png", "green.png", "green.png",
+        "blue.png", "blue.png", "blue.png",
+        "pink.png", "pink.png",
+        "red.png",
     ];
 
-    // Create a LONG scrolling list
+    // Build the carousel
     for (let i = 0; i < 40; i++) {
         let img = document.createElement("img");
         img.src = "ducks/" + ducks[Math.floor(Math.random() * ducks.length)];
@@ -40,11 +38,16 @@ function startRollAnimation(finalDuck) {
         duckCarousel.appendChild(img);
     }
 
-    // Animate scroll (now wide enough)
-    duckCarousel.style.transition = "transform 2s linear";
-    duckCarousel.style.transform = "translateX(-3000px)";
+    // Calculate layout before measuring
+    requestAnimationFrame(() => {
+        const containerWidth = duckCarousel.scrollWidth;
+        const visibleWidth = duckCarousel.clientWidth;
+        const scrollDistance = containerWidth - visibleWidth;
 
-    // After animation ends → show final duck
+        duckCarousel.style.transition = "transform 2s linear";
+        duckCarousel.style.transform = `translateX(-${scrollDistance}px)`;
+    });
+
     setTimeout(() => {
         duckCarousel.style.transition = "";
         duckCarousel.style.transform = "";
