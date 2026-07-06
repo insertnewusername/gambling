@@ -1,0 +1,8 @@
+body {
+	background-color: skyblue;
+	display: flex; /* enables "flexbox" which allows you to display your elements in a flexible way */
+	align-items: center; /* centers the items vertically inside the container */
+	justify-content: center; /* centers the items horizontally inside the container */
+	height: 100vh; /* sets the height to the full height of the screen */
+	margin: 0; /* remove the small margin (empty space) surrounding the body tag by default */
+}
