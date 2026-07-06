@@ -112,12 +112,22 @@ document.addEventListener("keydown", (event) => {
 });
 
     // RELEASE = cancel roll
-    document.addEventListener("keyup", (event) => {
-        if (event.key === "j") {
-            isHolding = false;
-            clearTimeout(holdTimer);
+document.addEventListener("keyup", (event) => {
+    if (event.key === "j") {
+        isHolding = false;
+        clearTimeout(holdTimer);
+        
+        // --- Reset progress bar ---
+        const progressBar = document.getElementById('holdProgress');
+        const progressFill = document.getElementById('progressFill');
+        progressBar.style.display = 'none';
+        progressFill.style.width = '0%';
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
         }
-    });
+    }
+});
 </script>
 </body>
 </html>
