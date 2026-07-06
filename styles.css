@@ -59,7 +59,8 @@ body {
 }
 
 #top {
-    width: 90%;
+    width: 100vw;
+    box-sizing: border-box;
     font-size: 64px;
     color: black;
     background: rgba(9, 158, 221, 0.4);
