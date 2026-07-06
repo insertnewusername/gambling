@@ -116,19 +116,18 @@ function startRollAnimation(finalDuck) {
     rollOverlay.style.display = "flex";
     resultText.innerHTML = "";
 
-    //  Reset the container
-    duckCarousel.innerHTML = ""; // Delete old track
+    // Reset the container
+    duckCarousel.innerHTML = "";
 
-    // Create the inner moving track 
+    // Create the inner moving track
     const track = document.createElement("div");
     track.style.display = "flex";
     track.style.alignItems = "center";
     track.style.height = "100%";
-    track.style.width = "max-content"; // Make it as wide as the ducks
-    track.style.transition = "none";   // No animation yet
+    track.style.width = "max-content";
+    track.style.transition = "none";
     track.style.transform = "translateX(0)";
 
-    // Duck pool for the spinning effect 
     const fillerDucks = [
         "yellow.png", "yellow.png", "yellow.png", "yellow.png", "yellow.png",
         "green.png", "green.png", "green.png", "green.png",
@@ -138,33 +137,33 @@ function startRollAnimation(finalDuck) {
     ];
 
     const totalDucks = 50;
-    const targetIndex = 28; // Winner sits here
+    const targetIndex = 28;
 
-    // Fill with ducks!
     for (let i = 0; i < totalDucks; i++) {
         let img = document.createElement("img");
         
         let src;
         if (i === targetIndex) {
             src = "ducks/" + finalDuck;
-            img.id = "targetDuck"; // Tag the winner
+            img.id = "targetDuck";
+            img.style.border = "4px solid gold"; // 👈 Highlight the winner
+            img.style.borderRadius = "12px";
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
         }
         
         img.src = src;
-        img.style.height = "200px";    
-        img.style.width = "auto";      
+        img.style.height = "200px";
+        img.style.width = "auto";
         img.style.margin = "0 10px";
-        img.style.flexShrink = "0";    // Stop images from squishing
+        img.style.flexShrink = "0";
         
         track.appendChild(img);
     }
 
-    // Put the track inside the carousel
     duckCarousel.appendChild(track);
 
-    // Calculate and animate 
+    // Calculate and animate
     requestAnimationFrame(() => {
         const target = document.getElementById("targetDuck");
         if (!target) return;
@@ -173,25 +172,18 @@ function startRollAnimation(finalDuck) {
         const targetOffset = target.offsetLeft;
         const targetWidth = target.offsetWidth;
 
-        // Distance to scroll to center the winning duck
         const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
 
-        // Apply smooth animation to the INNER track
         track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
         track.style.transform = `translateX(-${scrollToX}px)`;
     });
 
-setTimeout(() => {
-    duckCarousel.style.transition = "";
-    duckCarousel.style.transform = "";
-
-    duckCarousel.innerHTML = `
-        <img src="ducks/${finalDuck}" width="120">
-    `;
-
-    resultText.innerHTML = "Rolled: " + finalDuck.replace(".png", "");
-
-    // 👇 ADD THIS LINE TO SAVE THE DUCK
-    addDuckToCollection(finalDuck);
-
-}, 2000); }
+    // Show result AFTER animation ends
+    setTimeout(() => {
+        resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
+        
+        // Save the duck to collection
+        addDuckToCollection(finalDuck);
+        
+    }, 3200); 
+}

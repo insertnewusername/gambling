@@ -39,11 +39,12 @@
     const resultText = document.getElementById("resultText");
     const okButton = document.getElementById("okButton");
 
-    okButton.addEventListener("click", () => {
-     rollOverlay.style.display = "none";
-    display.innerHTML = "Coins: " + coins; // update coin display
+ okButton.addEventListener("click", () => {
+    rollOverlay.style.display = "none";
+    display.innerHTML = "Coins: " + coins;
     updateColours();
-    });
+    duckCarousel.innerHTML = "";
+});
 
 
     function updateColours() {
