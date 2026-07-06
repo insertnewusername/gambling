@@ -1,3 +1,99 @@
+// --- DUCK COLLECTION SYSTEM ---
+
+// Master list of all ducks
+const DUCK_TYPES = [
+    { id: 'yellow.png',     name: 'Yellow' },
+    { id: 'green.png',      name: 'Green' },
+    { id: 'blue.png',       name: 'Blue' },
+    { id: 'pink.png',       name: 'Pink' },
+    { id: 'red.png',        name: 'Red' },
+    { id: 'white(rare).png', name: 'White' }
+];
+
+// Load saved collection from localStorage, or start fresh
+function loadCollection() {
+    const saved = localStorage.getItem('duckCollection');
+    if (saved) {
+        return JSON.parse(saved);
+    }
+    // Initialize all counts to 0
+    const initial = {};
+    DUCK_TYPES.forEach(d => initial[d.id] = 0);
+    return initial;
+}
+
+let duckCounts = loadCollection();
+
+function saveCollection() {
+    localStorage.setItem('duckCollection', JSON.stringify(duckCounts));
+}
+
+// Render the collection bar at the bottom
+function renderCollection() {
+    const container = document.getElementById('collectionContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    DUCK_TYPES.forEach(duck => {
+        const count = duckCounts[duck.id] || 0;
+        const isUnlocked = count > 0;
+
+        const slot = document.createElement('div');
+        slot.className = `collection-slot ${isUnlocked ? 'unlocked' : ''}`;
+
+        // --- Image / Placeholder ---
+        const imgWrapper = document.createElement('div');
+        if (isUnlocked) {
+            const img = document.createElement('img');
+            img.src = `ducks/${duck.id}`;
+            img.alt = duck.name;
+            img.className = 'duck-img';
+            imgWrapper.appendChild(img);
+        } else {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'locked-placeholder';
+            placeholder.textContent = '?';
+            imgWrapper.appendChild(placeholder);
+        }
+
+        // --- Label ---
+        const label = document.createElement('div');
+        label.className = 'duck-label';
+        label.textContent = duck.name;
+
+        // --- Count ---
+        const countDisplay = document.createElement('div');
+        countDisplay.className = 'duck-count';
+        countDisplay.textContent = count;
+
+        slot.appendChild(imgWrapper);
+        slot.appendChild(label);
+        slot.appendChild(countDisplay);
+        container.appendChild(slot);
+    });
+}
+
+// Call this whenever a duck is rolled
+function addDuckToCollection(duckId) {
+    if (duckCounts[duckId] !== undefined) {
+        duckCounts[duckId]++;
+        saveCollection();
+        renderCollection();
+    }
+}
+
+// Initial render
+renderCollection();
+
+
+
+
+
+
+
+
+
+
 function rollDuck() {
     const roll = Math.random() * 100;
 
@@ -85,8 +181,17 @@ function startRollAnimation(finalDuck) {
         track.style.transform = `translateX(-${scrollToX}px)`;
     });
 
-    // Result
-    setTimeout(() => {
-        resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
-    }, 3200);
-}
+setTimeout(() => {
+    duckCarousel.style.transition = "";
+    duckCarousel.style.transform = "";
+
+    duckCarousel.innerHTML = `
+        <img src="ducks/${finalDuck}" width="120">
+    `;
+
+    resultText.innerHTML = "Rolled: " + finalDuck.replace(".png", "");
+
+    // 👇 ADD THIS LINE TO SAVE THE DUCK
+    addDuckToCollection(finalDuck);
+
+}, 2000); }
