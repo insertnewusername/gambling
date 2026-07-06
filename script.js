@@ -117,7 +117,7 @@ function rollDuck() {
     }
 }
 
-function startRollAnimation(finalDuck) {
+function startRollAnimation(chosenDuck) {
     rollOverlay.style.display = "flex";
     resultText.innerHTML = "";
 
@@ -148,7 +148,7 @@ function startRollAnimation(finalDuck) {
 
         let src;
         if (i === targetIndex) {
-            src = "ducks/" + finalDuck;
+            src = "ducks/" + chosenDuck;
             img.id = "targetDuck";
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
@@ -203,10 +203,10 @@ function startRollAnimation(finalDuck) {
     if (target) {
         target.classList.add("glow"); 
     }
-    const duckName = finalDuck.replace(".png", "");
-    const rarity = RARITY_MAP[finalDuck] || '';
+    const duckName = chosenDuck.replace(".png", "");
+    const rarity = RARITY_MAP[chosekDuck] || '';
     resultText.innerHTML = `🎉 Rolled: ${duckName} (${rarity})`;
-    addDuckToCollection(finalDuck);
+    addDuckToCollection(chosekDuck);
 }, 3200);
 }
 
@@ -232,8 +232,8 @@ function spawnFallingDucks(count = 2) {
         const size = 45 + Math.random() * 40;          // 45–85px
         const left = 5 + Math.random() * 90;           // 5% – 95%
         const rotation = Math.random() * 360;
-        const duration = 2.5 + Math.random() * 3;      // 2.5–5.5 seconds
-        const delay = Math.random() * 0.4;             // up to 0.4s delay
+        const duration = 2.5 + Math.random() * 3;      
+        const delay = Math.random() * 0.4;             
 
         duck.style.cssText = `
             position: absolute;
@@ -257,12 +257,12 @@ function spawnFallingDucks(count = 2) {
     }
 }
 
-// --- WEIGHTED RANDOM DUCK (based on collection counts) ---
+// --- Spawn ducks based on collection---
 
 function getWeightedRandomDuck() {
     const total = Object.values(duckCounts).reduce((a, b) => a + b, 0);
     if (total === 0) {
-        // Fallback: if no ducks owned yet, show all types equally
+        // If no ducks owned :(
         const allIds = DUCK_TYPES.map(d => d.id);
         return allIds[Math.floor(Math.random() * allIds.length)];
     }
@@ -277,6 +277,6 @@ function getWeightedRandomDuck() {
             }
         }
     }
-    // Safety fallback (should never reach)
+    // Safety fallback 
     return DUCK_TYPES[0].id;
 }

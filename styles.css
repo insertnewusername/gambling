@@ -88,15 +88,15 @@ body {
 }
 
 
-.bg-gold {
+.gold {
     background-color: gold;
 }
 
-.bg-orchid {
+.orchid {
     background-color: orchid;
 }
 
-.bg-green {
+.green {
     background-color: lightgreen;
 }
 
@@ -212,6 +212,7 @@ body {
 }
 
 #centeritems {
+
     background: rgba(244, 247, 255, 0.75);
     backdrop-filter: blur(8px);
     border-radius: 20px;
