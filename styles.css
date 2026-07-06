@@ -9,11 +9,11 @@ body {
 }
 
 #displayWrapper {
-    flex: 1;                     /* Takes remaining space */
+    flex: 1;                    
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;      /* Centers content vertically */
+    justify-content: center;      
     width: 100%;
 }
 
@@ -60,9 +60,8 @@ body {
 #progressFill {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #ffd700, #ff8c00);
+    background:#ffd700;
     border-radius: 10px;
-    /* 👇 REMOVED transition: width 0.05s linear; */
 }
 
 #header {
@@ -147,7 +146,7 @@ body {
 }
 
 #duckCarousel img {
-    height: 200px;              /* Bigger! */
+    height: 200px;           
     width: auto;
     margin: 0 12px;
     flex-shrink: 0;
@@ -157,7 +156,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Glow effect on the winning duck – applied via JS */
+/* Glow effect on chosen duck */
 #duckCarousel img.glow {
     border: 4px solid #ffd700;
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3);
@@ -252,7 +251,7 @@ body {
     padding: 5px;
 }
 
-/* When unlocked, give it a shiny border */
+/* Shiny border for unlocked */
 .collection-slot.unlocked {
     border-color: #ffd700;
     background: rgba(255, 215, 0, 0.1);
@@ -266,7 +265,7 @@ body {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-/* Locked state: show a big "?" */
+/* Locked */
 .collection-slot .locked-placeholder {
     width: 50px;
     height: 50px;
@@ -316,7 +315,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none;      /* lets clicks pass through */
+    pointer-events: none;     
     z-index: 9999;
     overflow: hidden;
 }
