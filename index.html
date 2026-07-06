@@ -2,10 +2,20 @@
 <html>
 <link rel="stylesheet" href="styles.css">
 <body>
-    <h1 id="top">Onekey RNG</h1>
+    <div><h1 id="top">Onekey RNG</h1></div>
     <h1 id="display">Press "j" to start!</h1>
 
     <img id="duck" src="" width="200">
+    <!-- Roll Overlay -->
+<div id="rollOverlay">
+    <div id="rollWindow">
+        <div id="duckCarousel"></div>
+        <div id="indicator">▼</div>
+        <div id="resultText"></div>
+        <button id="okButton">OK</button>
+    </div>
+</div>
+
 
     <script src="script.js"></script>
 
@@ -16,6 +26,15 @@
 
     const display = document.getElementById("display");
     const duckImg = document.getElementById("duck");
+    const rollOverlay = document.getElementById("rollOverlay");
+    const duckCarousel = document.getElementById("duckCarousel");
+    const resultText = document.getElementById("resultText");
+    const okButton = document.getElementById("okButton");
+
+    okButton.addEventListener("click", () => {
+     rollOverlay.style.display = "none";
+    });
+
 
     function updateColours() {
         if (coins >= 100) {
@@ -46,16 +65,14 @@
                         coins -= 100;
 
                         let duckFile = rollDuck();
-                        duckImg.src = "ducks/" + duckFile;
+                      startRollAnimation(duckFile);
 
-                        display.innerHTML =
-                            "Rolled: " + duckFile + " (Coins left: " + coins + ")";
                     } else {
                         display.innerHTML =
                             "Not enough coins to roll! (" + coins + ")";
                     }
                 }
-            }, 3000); // 3 seconds
+            }, 2000); // 3 seconds
         }
     });
 
