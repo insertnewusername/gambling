@@ -8,6 +8,19 @@ body {
     margin: 0;
 }
 
+#resultText {
+    font-size: 28px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #1a1a2e;
+    margin: 15px 0 10px;
+    min-height: 50px;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 10px 20px;
+    border-radius: 16px;
+    border: 2px dashed rgba(255, 215, 0, 0.3);
+}
+
 #displayWrapper {
     flex: 1;
     display: flex;
@@ -84,54 +97,98 @@ body {
 
 /* Rolling window */
 #rollWindow {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    width: 80vw;      /* 80% of screen width */
-    height: 60vh;     /* 60% of screen height */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px 30px 30px;
+    border-radius: 24px;
+    width: 80vw;
+    height: 65vh;
+    max-width: 800px;
     text-align: center;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #duckCarousel {
     display: flex;
     overflow: hidden;
-    height: 300px;
+    height: 320px;              /* Slightly taller */
     width: 100%;
     border: 4px solid #333;
-    border-radius: 12px;          
-    background: #f0f0f0;          
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    margin-bottom: 20px;
-    align-items: center;       
+    border-radius: 16px;        /* More rounded */
+    background: #1a1a2e;        /* Dark background makes ducks pop */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 60px rgba(255, 215, 0, 0.05);
+    margin-bottom: 10px;
+    align-items: center;
+    position: relative;         /* For the indicator overlay */
 }
 
 #duckCarousel img {
-    height: 200px;            
-    width: auto;                 
-    margin: 0 10px;
-    flex-shrink: 0;            
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    height: 200px;              /* Bigger! */
+    width: auto;
+    margin: 0 12px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
 }
 
+/* Glow effect on the winning duck – applied via JS */
+#duckCarousel img.glow {
+    border: 4px solid #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.3);
+    transform: scale(1.05);
+}
 
 /* Indicator arrow */
 #indicator {
-    position: relative;
-    font-size: 40px;
-    margin-top: -30px;        
-    margin-bottom: 10px;
+    position: absolute;
+    top: -18px;              
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
     color: #ffd700;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    z-index: 5;
-    pointer-events: none;      
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.4);
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    line-height: 1.8;
 }
 
 /* OK button */
 #okButton {
-    padding: 10px 20px;
-    font-size: 20px;
+    padding: 14px 48px;
+    font-size: 22px;
+    font-weight: bold;
+    font-family: sans-serif;
     cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ffd700, #f5a623);
+    color: #1a1a2e;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+#okButton:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6);
+    background: linear-gradient(135deg, #ffe066, #f5a623);
+}
+
+#okButton:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
 }
 
 

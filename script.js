@@ -177,14 +177,12 @@ function startRollAnimation(finalDuck) {
         });
     });
 
-    setTimeout(() => {
-        const target = document.getElementById("targetDuck");
-        if (target) {
-            target.style.border = "4px solid gold";
-            target.style.borderRadius = "12px";
-            target.style.boxShadow = "0 0 30px gold, 0 0 60px rgba(255, 215, 0, 0.5)";
-        }
-        resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
-        addDuckToCollection(finalDuck);
-    }, 3200);
+ setTimeout(() => {
+    const target = document.getElementById("targetDuck");
+    if (target) {
+        target.classList.add("glow"); 
+    }
+    resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
+    addDuckToCollection(finalDuck);
+}, 3200);
 }
