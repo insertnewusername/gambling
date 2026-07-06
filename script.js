@@ -1,3 +1,15 @@
+// --- COIN SAVING SYSTEM ---
+const COINS_KEY = 'onekey_coins';
+
+function loadCoins() {
+    const saved = localStorage.getItem(COINS_KEY);
+    return saved ? parseInt(saved, 10) : 0;
+}
+
+function saveCoins() {
+    localStorage.setItem(COINS_KEY, coins.toString());
+}
+
 // --- DUCK COLLECTION SYSTEM ---
 
 const DUCK_TYPES = [
