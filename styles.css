@@ -60,12 +60,17 @@ body {
 
 #top {
     width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     box-sizing: border-box;
+    text-align: center;
     font-size: 64px;
     color: black;
     background: rgba(9, 158, 221, 0.4);
     padding: 0 20px;
-    border-radius: 20px;
     backdrop-filter: blur(4px);
     line-height: 1.8;
 }
