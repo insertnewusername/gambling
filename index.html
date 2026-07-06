@@ -6,16 +6,27 @@
         </style>
 	</head>
 	<body>
+        <h1 id="top">Onekey RNG</h1>
         <h1 id="display">Press "j" to start!</h1>
+
+
+         <!-- Duck image -->
+         <img id="duck" src="" width="200">
+
+            <!-- Load rollDuck FIRST -->
+            <script src="script.js"></script>
+
         <script> 
             let random_number = 0; //declare a variable to hold a number
             let coins = 0;
+            let isHolding = false;
             const display = document.getElementById("display")
             document.addEventListener("keydown", (event) => {
-                if (event.key == "j") {
+                if (event.key === "j" && !isHolding) {
+                    isHolding = true; //prevents repeat firing
                     random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
                     coins += random_number;
-                    display.innerHTML = "Rolled " + random_number + "! Coins: " + coins;
+                    display.innerHTML = "Coins: " + coins;
 
 
 
@@ -29,6 +40,25 @@
 
                 }
             });
+
+
+                // HOLD = roll (costs 100 coins)
+        document.addEventListener("keyup", (event) => {
+          if (event.key === "j") {
+                isHolding = false;
+
+             if (coins >= 100) {
+                  coins -= 100;
+
+                let duckFile = rollDuck();
+                         duckImg.src = "ducks/" + duckFile;
+
+                        display.innerHTML = "Rolled: " + duckFile + " (Coins left: " + coins + ")";
+                     } else {
+                          display.innerHTML = "Not enough coins to roll! (" + coins + ")";
+                     }
+                    }
+});
 
 
         </script>

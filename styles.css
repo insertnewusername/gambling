@@ -7,13 +7,19 @@ body {
 	margin: 0; /* remove the small margin (empty space) surrounding the body tag by default */
 }
 
-h1 { /* now these rules only apply to h1 tags! */
+#display { /* now these rules only apply to h1 tags! */
 	color: black; /* you can set your text color to whatever - i kept it black */
 	font-size: 67px; /* let's make it mega big!! you can change this number to tweak the size to your liking*/
 	font-family: sans-serif; /* you can set this to serif, sans-serif, monospace, or cursive! */
 
 }
 
+#top {
+    color: black;
+    font-size: 60px;
+    font-family: sans-serif;
+    text-align: center;
+}
 
 .bg-gold {
     background-color: gold;
