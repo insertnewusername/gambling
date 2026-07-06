@@ -142,12 +142,13 @@
             hideProgressBar(); // Hides bar
         }
 
-    // Press "j" to close the overlay (same as clicking OK)
+ // Press "j" to close the overlay – ONLY after the result is displayed
 document.addEventListener("keydown", (event) => {
-    if (event.key === "j" && rollOverlay.style.display === "flex") {
-        okButton.click(); // Triggers the OK button's click handler
+    if (event.key === "j" && rollOverlay.style.display === "flex" && resultText.innerHTML !== "") {
+        okButton.click();
     }
 });
+
     });
 </script>
 </body>
