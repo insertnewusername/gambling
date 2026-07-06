@@ -225,11 +225,11 @@ function spawnFallingDucks(count = 2) {
 
     for (let i = 0; i < count; i++) {
         const duck = document.createElement('img');
-        const randomDuck = duckIds[Math.floor(Math.random() * duckIds.length)];
+        const randomDuck = getWeightedRandomDuck();
         duck.src = `ducks/${randomDuck}`;
 
         // Randomise size, position, rotation, and fall speed
-        const size = 30 + Math.random() * 40;          // 30–70px
+        const size = 45 + Math.random() * 40;          // 45–85px
         const left = 5 + Math.random() * 90;           // 5% – 95%
         const rotation = Math.random() * 360;
         const duration = 2.5 + Math.random() * 3;      // 2.5–5.5 seconds
@@ -255,4 +255,28 @@ function spawnFallingDucks(count = 2) {
             if (duck.parentNode) duck.remove();
         }, totalTime);
     }
+}
+
+// --- WEIGHTED RANDOM DUCK (based on collection counts) ---
+
+function getWeightedRandomDuck() {
+    const total = Object.values(duckCounts).reduce((a, b) => a + b, 0);
+    if (total === 0) {
+        // Fallback: if no ducks owned yet, show all types equally
+        const allIds = DUCK_TYPES.map(d => d.id);
+        return allIds[Math.floor(Math.random() * allIds.length)];
+    }
+
+    let rand = Math.random() * total;
+    for (const id in duckCounts) {
+        const count = duckCounts[id];
+        if (count > 0) {
+            rand -= count;
+            if (rand <= 0) {
+                return id;
+            }
+        }
+    }
+    // Safety fallback (should never reach)
+    return DUCK_TYPES[0].id;
 }
