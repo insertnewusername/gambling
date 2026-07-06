@@ -180,7 +180,6 @@ function startRollAnimation(finalDuck) {
     // Show result AFTER animation ends
     setTimeout(() => {
         resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
-        img.style.border = "4px solid gold"; // 👈 Highlight the winner
         
         // Save the duck to collection
         addDuckToCollection(finalDuck);
