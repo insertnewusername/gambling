@@ -13,7 +13,8 @@
             document.addEventListener("keydown", (event) => {
                 if (event.key == "j") {
                     random_number = Math.floor(Math.random() * 10) + 1; // multiply the number by 10, round it down, then add 1 so it's 1-10 instead of 0-9!
-                    display.innerHTML = random_number;
+                    coins += random_number;
+                    display.innerHTML = "Rolled " + random_number + "! Coins: " + coins;
                 }
             });
         </script>
