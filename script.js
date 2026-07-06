@@ -22,10 +22,17 @@ function startRollAnimation(finalDuck) {
 
     duckCarousel.innerHTML = ""; // clear previous
 
-    const ducks = ["yellow.png", "green.png", "blue.png", "pink.png", "red.png"];
+    const ducks = [
+        "yellow.png", "yellow.png", "yellow.png", "yellow.png", "yellow.png", // 50%
+        "green.png", "green.png", "green.png", "green.png",                  // 25%
+        "blue.png", "blue.png", "blue.png",                                  // 15%
+        "pink.png", "pink.png",                                              // 6%
+        "red.png",                                                           // 3%
+        // white is NOT in the spin list (rare reveal only)
+    ];
 
-    // Create scrolling ducks
-    for (let i = 0; i < 20; i++) {
+    // Create a LONG scrolling list
+    for (let i = 0; i < 40; i++) {
         let img = document.createElement("img");
         img.src = "ducks/" + ducks[Math.floor(Math.random() * ducks.length)];
         img.style.width = "100px";
@@ -33,9 +40,9 @@ function startRollAnimation(finalDuck) {
         duckCarousel.appendChild(img);
     }
 
-    // Animate scroll
-    duckCarousel.style.transition = "transform 1.5s linear";
-    duckCarousel.style.transform = "translateX(-1500px)";
+    // Animate scroll (now wide enough)
+    duckCarousel.style.transition = "transform 2s linear";
+    duckCarousel.style.transform = "translateX(-3000px)";
 
     // After animation ends → show final duck
     setTimeout(() => {
@@ -47,5 +54,5 @@ function startRollAnimation(finalDuck) {
         `;
 
         resultText.innerHTML = "Rolled: " + finalDuck.replace(".png", "");
-    }, 1500);
+    }, 2000);
 }

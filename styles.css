@@ -53,19 +53,24 @@ body {
     background: white;
     padding: 20px;
     border-radius: 15px;
-    width: 400px;
+    width: 80vw;      /* 80% of screen width */
+    height: 60vh;     /* 60% of screen height */
     text-align: center;
-    position: relative;
 }
 
-/* Ducks scroll */
 #duckCarousel {
     display: flex;
     overflow: hidden;
-    height: 120px;
-    border: 2px solid black;
-    margin-bottom: 10px;
+    height: 300px;    /* big carousel height */
+    border: 3px solid black;
+    margin-bottom: 20px;
 }
+
+#duckCarousel img {
+    width: 200px;     /* large duck images */
+    margin-right: 20px;
+}
+
 
 /* Indicator arrow */
 #indicator {
