@@ -117,8 +117,14 @@ body {
 
 /* Indicator arrow */
 #indicator {
-    font-size: 30px;
+    position: relative;
+    font-size: 40px;
+    margin-top: -30px;        
     margin-bottom: 10px;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    z-index: 5;
+    pointer-events: none;      
 }
 
 /* OK button */

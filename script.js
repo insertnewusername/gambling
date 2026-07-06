@@ -120,10 +120,11 @@ function startRollAnimation(finalDuck) {
 
     const totalDucks = 50;
     const targetIndex = 28;
+    const loadPromises = [];
 
     for (let i = 0; i < totalDucks; i++) {
         let img = document.createElement("img");
-        
+
         let src;
         if (i === targetIndex) {
             src = "ducks/" + finalDuck;
@@ -131,33 +132,48 @@ function startRollAnimation(finalDuck) {
         } else {
             src = "ducks/" + fillerDucks[Math.floor(Math.random() * fillerDucks.length)];
         }
-        
+
         img.src = src;
         img.style.width = "120px";
         img.style.height = "120px";
-        img.style.objectFit = "contain";    
+        img.style.objectFit = "contain";
         img.style.margin = "0 10px";
         img.style.flexShrink = "0";
         img.style.borderRadius = "8px";
-        
+        img.style.backgroundColor = "#f0f0f0"; // fallback while loading
+
+
+        const loadPromise = new Promise((resolve) => {
+            if (img.complete) {
+                resolve();
+            } else {
+                img.onload = resolve;
+                img.onerror = resolve; // resolve anyway
+            }
+        });
+        loadPromises.push(loadPromise);
+
         track.appendChild(img);
     }
 
     duckCarousel.appendChild(track);
 
-    requestAnimationFrame(() => {
+    Promise.all(loadPromises).then(() => {
+        // Double RAF ensures the browser has finished layout
         requestAnimationFrame(() => {
-            const target = document.getElementById("targetDuck");
-            if (!target) return;
+            requestAnimationFrame(() => {
+                const target = document.getElementById("targetDuck");
+                if (!target) return;
 
-            const containerWidth = duckCarousel.clientWidth;
-            const targetOffset = target.offsetLeft;
-            const targetWidth = target.offsetWidth;
+                const containerWidth = duckCarousel.clientWidth;
+                const targetOffset = target.offsetLeft;
+                const targetWidth = target.offsetWidth;
 
-            const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
+                const scrollToX = targetOffset - (containerWidth / 2) + (targetWidth / 2);
 
-            track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
-            track.style.transform = `translateX(-${scrollToX}px)`;
+                track.style.transition = "transform 3s cubic-bezier(0.25, 0.1, 0.15, 1)";
+                track.style.transform = `translateX(-${scrollToX}px)`;
+            });
         });
     });
 
