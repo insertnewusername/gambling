@@ -191,7 +191,7 @@ body {
     cursor: pointer;
     border: none;
     border-radius: 50px;
-    background: linear-gradient(135deg, #ffd700, #f5a623);
+    background:  #ffd700;
     color: #1a1a2e;
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
     transition: all 0.3s ease;
@@ -203,7 +203,7 @@ body {
 #okButton:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 8px 35px rgba(255, 215, 0, 0.6);
-    background: linear-gradient(135deg, #ffe066, #f5a623);
+    background:#ffe066;
 }
 
 #okButton:active {
