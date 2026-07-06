@@ -75,6 +75,14 @@
             document.body.className = "bg-green";
         }
         // else → skyblue
+
+        // check for coins for text
+    if (coins >=100) {
+        reachedamount.style.display = "block"
+    }
+    else {
+        reachedamount.style.display = "none"
+    }
     }
 
     function showProgressBar() {
@@ -146,13 +154,6 @@
             hideProgressBar(); // Hides bar
         }
     });
-
-    if (coins >=100) {
-        reachedamount.style.display = "block"
-    }
-    else {
-        reachedamount.style.display = "none"
-    }
 </script>
 </body>
 </html>
