@@ -141,14 +141,6 @@
             clearTimeout(holdTimer);
             hideProgressBar(); // Hides bar
         }
-
- // Press "j" to close the overlay – ONLY after the result is displayed
-document.addEventListener("keydown", (event) => {
-    if (event.key === "j" && rollOverlay.style.display === "flex" && resultText.innerHTML !== "") {
-        okButton.click();
-    }
-});
-
     });
 </script>
 </body>
