@@ -212,9 +212,6 @@ body {
 }
 
 #centeritems {
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
     background: rgba(244, 247, 255, 0.75);
     backdrop-filter: blur(8px);
     border-radius: 20px;
