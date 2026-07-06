@@ -1,6 +1,5 @@
 // --- DUCK COLLECTION SYSTEM ---
 
-// Master list of all ducks
 const DUCK_TYPES = [
     { id: 'yellow.png',     name: 'Yellow' },
     { id: 'green.png',      name: 'Green' },
@@ -10,13 +9,11 @@ const DUCK_TYPES = [
     { id: 'white(rare).png', name: 'White' }
 ];
 
-// Load saved collection from localStorage, or start fresh
 function loadCollection() {
     const saved = localStorage.getItem('duckCollection');
     if (saved) {
         return JSON.parse(saved);
     }
-    // Initialize all counts to 0
     const initial = {};
     DUCK_TYPES.forEach(d => initial[d.id] = 0);
     return initial;
@@ -28,7 +25,6 @@ function saveCollection() {
     localStorage.setItem('duckCollection', JSON.stringify(duckCounts));
 }
 
-// Render the collection bar at the bottom
 function renderCollection() {
     const container = document.getElementById('collectionContainer');
     if (!container) return;
@@ -41,7 +37,6 @@ function renderCollection() {
         const slot = document.createElement('div');
         slot.className = `collection-slot ${isUnlocked ? 'unlocked' : ''}`;
 
-        // --- Image / Placeholder ---
         const imgWrapper = document.createElement('div');
         if (isUnlocked) {
             const img = document.createElement('img');
@@ -56,12 +51,10 @@ function renderCollection() {
             imgWrapper.appendChild(placeholder);
         }
 
-        // --- Label ---
         const label = document.createElement('div');
         label.className = 'duck-label';
         label.textContent = duck.name;
 
-        // --- Count ---
         const countDisplay = document.createElement('div');
         countDisplay.className = 'duck-count';
         countDisplay.textContent = count;
@@ -73,7 +66,6 @@ function renderCollection() {
     });
 }
 
-// Call this whenever a duck is rolled
 function addDuckToCollection(duckId) {
     if (duckCounts[duckId] !== undefined) {
         duckCounts[duckId]++;
@@ -82,17 +74,9 @@ function addDuckToCollection(duckId) {
     }
 }
 
-// Initial render
 renderCollection();
 
-
-
-
-
-
-
-
-
+// --- ROLL LOGIC ---
 
 function rollDuck() {
     const roll = Math.random() * 100;
@@ -116,10 +100,8 @@ function startRollAnimation(finalDuck) {
     rollOverlay.style.display = "flex";
     resultText.innerHTML = "";
 
-    // Reset the container
     duckCarousel.innerHTML = "";
 
-    // Create the inner moving track
     const track = document.createElement("div");
     track.style.display = "flex";
     track.style.alignItems = "center";
@@ -162,7 +144,6 @@ function startRollAnimation(finalDuck) {
 
     duckCarousel.appendChild(track);
 
-    // Calculate and animate
     requestAnimationFrame(() => {
         const target = document.getElementById("targetDuck");
         if (!target) return;
@@ -177,12 +158,14 @@ function startRollAnimation(finalDuck) {
         track.style.transform = `translateX(-${scrollToX}px)`;
     });
 
-    // Show result AFTER animation ends
     setTimeout(() => {
+        const target = document.getElementById("targetDuck");
+        if (target) {
+            target.style.border = "4px solid gold";
+            target.style.borderRadius = "12px";
+            target.style.boxShadow = "0 0 30px gold, 0 0 60px rgba(255, 215, 0, 0.5)";
+        }
         resultText.innerHTML = "🎉 Rolled: " + finalDuck.replace(".png", "");
-        
-        // Save the duck to collection
         addDuckToCollection(finalDuck);
-        
-    }, 3200); 
+    }, 3200);
 }
