@@ -70,7 +70,7 @@
     var pinkduckno = 0;
     var redduckno = 0;
     var whiteduckno = 0;
-    const HOLD_DURATION = 2000;
+
     const BAR_SHOW_DELAY = 300;  
 
     const display = document.getElementById("display");
@@ -111,7 +111,7 @@
         if (progressInterval) clearInterval(progressInterval);
         progressInterval = setInterval(() => {
             const elapsed = Date.now() - progressStartTime;
-            const progress = Math.min(elapsed / HOLD_DURATION, 1);
+            const progress = Math.min(elapsed / 2000, 1);
             progressFill.style.width = (progress * 100) + '%';
         }, 50);
     }
@@ -161,7 +161,7 @@
                     // Reset progress bar
                     hideProgressBar();
                 }
-            }, HOLD_DURATION);
+            }, 2000);
         }
     });
 
