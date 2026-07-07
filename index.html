@@ -74,7 +74,6 @@
     const BAR_SHOW_DELAY = 300;  
 
     const display = document.getElementById("display");
-    const resultText = document.getElementById("resultText");
     const progressBar = document.getElementById('holdProgress');
     const progressFill = document.getElementById('progressFill');
     const reachedamount = document.getElementById('reached100');
@@ -153,9 +152,9 @@
                 if (isHolding) {
                     if (coins >= 100) {
                         coins -= 100;
-                        let duckFile = rollDuck();
-                        display.innerHTML = "Rolled: " + duckFile;
-                        updateduckcount(duckFile);
+                        let chosenDuck = rollDuck();
+                        display.innerHTML = "Rolled: " + chosenDuck;
+                        updateduckcount(chosenDuck);
                     } else {
                         display.innerHTML = "Not enough coins to roll! (" + coins + ")";
                     }
