@@ -43,6 +43,12 @@
     let progressInterval = null;
     let showBarTimeout = null;      
     let progressStartTime = 0;
+    let yellowduckno = 0;
+    let greenduckno = 0;
+    let blueduckno = 0;
+    let pinkduckno = 0;
+    let redduckno = 0;
+    let whiteduckno = 0;
     const HOLD_DURATION = 2000;
     const BAR_SHOW_DELAY = 300;  
 
@@ -54,17 +60,10 @@
     const progressBar = document.getElementById('holdProgress');
     const progressFill = document.getElementById('progressFill');
     const reachedamount = document.getElementById('reached100');
-    let coins = loadCoins();
+    let coins = 9;
     display.innerHTML = "Coins: " + coins;
     updateColours();
 
-    okButton.addEventListener("click", () => {
-        rollOverlay.style.display = "none";
-        display.innerHTML = "Coins: " + coins;
-        updateColours();
-        duckCarousel.innerHTML = "";
-        hideProgressBar(); 
-    });
 
     function updateColours() {
         // Reset first
@@ -121,13 +120,8 @@
             // --- Random coin gain---
             let random_number = Math.floor(Math.random() * 10) + 1;
             coins += random_number;
-            saveCoins(); 
             display.innerHTML = "Coins: " + coins;
             updateColours();
-
-                    // ---  Spawn falling ducks (1–3 per press) ---
-        const duckCount = 1 + Math.floor(Math.random() * 3);  // 1, 2, or 3
-        spawnFallingDucks(duckCount);
 
             // --- Wait 300ms before showing bar---
             showBarTimeout = setTimeout(() => {
@@ -141,9 +135,8 @@
                 if (isHolding) {
                     if (coins >= 100) {
                         coins -= 100;
-                        saveCoins(); 
                         let duckFile = rollDuck();
-                        startRollAnimation(duckFile);
+                        display.innerHTML = `Rolled: ${duckFile}`;
                     } else {
                         display.innerHTML = "Not enough coins to roll! (" + coins + ")";
                     }
