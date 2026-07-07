@@ -3,7 +3,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     height: 100vh;
     margin: 0;
     font-family: sans-serif;
@@ -12,22 +11,9 @@ body {
 #displayWrapper {
     flex: 1;                    
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;      
     width: 100%;
-}
-
-#resultText {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1a1a2e;
-    margin: 15px 0 10px;
-    min-height: 50px;
-    background: rgba(255, 215, 0, 0.1);
-    padding: 10px 20px;
-    border-radius: 16px;
-    border: 2px dashed rgba(255, 215, 0, 0.3);
 }
 
 #reached100 {
@@ -118,16 +104,13 @@ body {
     padding: 15px 25px;
     background: rgba(177, 218, 245, 0.75);
     border-radius: 20px;
-    z-index: 10;
 }
 
 .collection-slot {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 80px;
-    height: 100px;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     border: 2px solid #444;
@@ -142,20 +125,6 @@ body {
     background: rgb(214, 222, 231);
 }
 
-/* Locked */
-.collection-slot .locked-placeholder {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: bold;
-    color: #666;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    font-family: sans-serif;
-}
 
 .collection-slot .duck-label {
     color: #aaa;
@@ -174,8 +143,4 @@ body {
     margin-top: 2px;
     min-width: 20px;
     text-align: center;
-}
-
-.collection-slot.unlocked .duck-label {
-    color: #ffd700;
 }
