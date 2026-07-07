@@ -154,7 +154,7 @@
                     if (coins >= 100) {
                         coins -= 100;
                         let duckFile = rollDuck();
-                        display.innerHTML = `Rolled: ${duckFile}`;
+                        display.innerHTML = "Rolled: " + duckFile;
                         updateduckcount(duckFile);
                     } else {
                         display.innerHTML = "Not enough coins to roll! (" + coins + ")";
