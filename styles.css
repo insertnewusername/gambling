@@ -49,8 +49,7 @@ body {
 
 #header {
     width: 100%;
-    background: rgba(9, 158, 221, 0.3);
-    backdrop-filter: blur(4px);
+    background: rgba(9, 158, 221);
     flex-shrink: 0;
     box-sizing: border-box;
 }
@@ -61,8 +60,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 12px 20px;
-    background: rgba(9, 158, 221, 0.3);
-    backdrop-filter: blur(4px);
+    background: rgba(9, 158, 221);
     width: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
@@ -86,10 +84,8 @@ body {
 #centeritems {
 
     background: rgba(244, 247, 255, 0.75);
-    backdrop-filter: blur(8px);
     border-radius: 20px;
     border: 2px solid rgba(255, 255, 255, 0.57);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 
