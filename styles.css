@@ -97,7 +97,6 @@ body {
 
 
 
-
 #centeritems {
 
     background: rgba(244, 247, 255, 0.75);
@@ -114,9 +113,10 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
     gap: 15px;
     padding: 15px 25px;
-    background: rgba(183, 220, 242, 0.75);
+    background: rgba(177, 218, 245, 0.75);
     border-radius: 20px;
     z-index: 10;
 }
@@ -128,17 +128,12 @@ body {
     justify-content: center;
     width: 80px;
     height: 100px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    transition: all 0.3s ease;
+    border: 2px solid #444;
     padding: 5px;
 }
 
-/* Shiny border for unlocked */
-.collection-slot.unlocked {
-    border-color: #ffd700;
-    background: rgba(255, 215, 0, 0.1);
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-}
 
 .collection-slot .duck-img {
     width: 50px;
