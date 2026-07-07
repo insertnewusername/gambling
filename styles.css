@@ -102,7 +102,7 @@ body {
     display: flex;
     gap: 15px;
     padding: 15px 25px;
-    background: rgba(177, 218, 245, 0.75);
+    background: rgba(177, 218, 245);
     border-radius: 20px;
 }
 

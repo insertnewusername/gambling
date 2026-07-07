@@ -51,7 +51,7 @@ function updateduckcount(duckFile) {
         window.pinkduckno++;
     } else if (duckFile === "Red Duck") {
         window.redduckno++;
-    } else if (duckFile === "White Duck (ULTRA RARE") {
+    } else if (duckFile === "White Duck (ULTRA RARE)") {
         window.whiteduckno++;
     }
     updateCollectionBar();
