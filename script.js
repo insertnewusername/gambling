@@ -40,18 +40,18 @@ function rollDuck() {
     }
 }
 
-function updateduckcount(duckFile) {
-    if (duckFile === "Yellow Duck") {
+function updateduckcount(chosenDuck) {
+    if (chosenDuck === "Yellow Duck") {
         window.yellowduckno++;
-    } else if (duckFile === "Green Duck") {
+    } else if (chosenDuck === "Green Duck") {
         window.greenduckno++;
-    } else if (duckFile === "Blue Duck") {
+    } else if (chosenDuck === "Blue Duck") {
         window.blueduckno++;
-    } else if (duckFile === "Pink Duck") {
+    } else if (chosenDuck === "Pink Duck") {
         window.pinkduckno++;
-    } else if (duckFile === "Red Duck") {
+    } else if (chosenDuck === "Red Duck") {
         window.redduckno++;
-    } else if (duckFile === "White Duck (ULTRA RARE)") {
+    } else if (chosenDuck === "White Duck (ULTRA RARE)") {
         window.whiteduckno++;
     }
     updateCollectionBar();
