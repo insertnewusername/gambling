@@ -61,30 +61,24 @@ function updateCollectionBar() {
     // Yellow
     document.getElementById('count-yellow').textContent = window.yellowduckno || 0;
     document.getElementById('img-yellow').src = window.yellowduckno > 0 ? 'ducks/yellow.png' : 'ducks/blank.png';
-    document.getElementById('slot-yellow').classList.toggle('unlocked', window.yellowduckno > 0);
 
     // Green
     document.getElementById('count-green').textContent = window.greenduckno || 0;
     document.getElementById('img-green').src = window.greenduckno > 0 ? 'ducks/green.png' : 'ducks/blank.png';
-    document.getElementById('slot-green').classList.toggle('unlocked', window.greenduckno > 0);
 
     // Blue
     document.getElementById('count-blue').textContent = window.blueduckno || 0;
     document.getElementById('img-blue').src = window.blueduckno > 0 ? 'ducks/blue.png' : 'ducks/blank.png';
-    document.getElementById('slot-blue').classList.toggle('unlocked', window.blueduckno > 0);
 
     // Pink
     document.getElementById('count-pink').textContent = window.pinkduckno || 0;
     document.getElementById('img-pink').src = window.pinkduckno > 0 ? 'ducks/pink.png' : 'ducks/blank.png';
-    document.getElementById('slot-pink').classList.toggle('unlocked', window.pinkduckno > 0);
 
     // Red
     document.getElementById('count-red').textContent = window.redduckno || 0;
     document.getElementById('img-red').src = window.redduckno > 0 ? 'ducks/red.png' : 'ducks/blank.png';
-    document.getElementById('slot-red').classList.toggle('unlocked', window.redduckno > 0);
 
     // White
     document.getElementById('count-white').textContent = window.whiteduckno || 0;
     document.getElementById('img-white').src = window.whiteduckno > 0 ? 'ducks/white(rare).png' : 'ducks/blank.png';
-    document.getElementById('slot-white').classList.toggle('unlocked', window.whiteduckno > 0);
 }
